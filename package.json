@@ -1,0 +1,25 @@
+{
+  "name": "ps-support",
+  "displayName": "PackscriptSupport",
+  "description": "Adds Syntax Highlighting for Packscript, an extension to python",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "packscript",
+      "aliases": ["Packscript", "packscript"],
+      "extensions": [".dps",".rps",".fps"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "packscript",
+      "scopeName": "source.dps",
+      "path": "./syntaxes/packscript.tmLanguage.json"
+    }]
+  }
+}

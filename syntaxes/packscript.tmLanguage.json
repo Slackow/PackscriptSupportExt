@@ -1,0 +1,54 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Packscript",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#key"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.packscript",
+				"match": "(?<=^\\s*/|run )\\b(execute|function|say|tellraw|summon)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.packscript",
+			"begin": "(\"|'|\"\"\"|''')",
+			"end": "\\1",
+			"patterns": [
+				{
+					"name": "constant.character.escape.packscript",
+					"match": "\\\\."
+				}
+			]
+		},
+		"entity": {
+			"patterns": [
+				{
+					"match": "(?<=^\\s*/.*)@[pears]\\b",
+					"name": "variable.packscript"
+				}
+			]
+		},
+		"key": {
+			"patterns": [
+				{
+					"match": "(?<=^\\s*/.*)\\b[a-zA-Z]\\w*(?=[:=](?!$))",
+					"name": "variable.parameter.packscript"
+				}
+			]
+		}
+	},
+	"scopeName": "source.dps"
+}
