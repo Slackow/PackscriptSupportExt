@@ -1,54 +1,125 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Packscript",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#entity"
-		},
-		{
-			"include": "#key"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.packscript",
-				"match": "(?<=^\\s*/|run )\\b(execute|function|say|tellraw|summon)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.packscript",
-			"begin": "(\"|'|\"\"\"|''')",
-			"end": "\\1",
-			"patterns": [
-				{
-					"name": "constant.character.escape.packscript",
-					"match": "\\\\."
-				}
-			]
-		},
-		"entity": {
-			"patterns": [
-				{
-					"match": "(?<=^\\s*/.*)@[pears]\\b",
-					"name": "variable.packscript"
-				}
-			]
-		},
-		"key": {
-			"patterns": [
-				{
-					"match": "(?<=^\\s*/.*)\\b[a-zA-Z]\\w*(?=[:=](?!$))",
-					"name": "variable.parameter.packscript"
-				}
-			]
-		}
-	},
-	"scopeName": "source.dps"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Packscript",
+  "patterns": [
+    {
+      "include": "#blankLines"
+    },
+    {
+      "include": "#packscript-special"
+    },
+    {
+      "include": "#packscript-regular"
+    },
+    {
+      "include": "#python"
+    }
+  ],
+  "repository": {
+    "packscript-special": {
+      "begin": "^\\s*/\\$",
+      "end": "(?<![\\\\\\n])$",
+      "name": "command.line.special.packscript",
+      "patterns": [
+        {
+          "match": "\\$\\(.*?\\)",
+          "name": "constant.character"
+        },
+        {
+          "include": "#packscript"
+        }
+      ]
+    },
+    "packscript-regular": {
+      "begin": "^(?=\\s*/.*)",
+      "end": "(?<![\\\\\\n])$",
+      "name": "command.line.special.regular",
+      "patterns": [
+        {
+          "include": "#packscript"
+        }
+      ]
+    },
+    "packscript": {
+      "patterns": [
+        {
+          "match": "\\b[a-zA-Z]\\w*(?=[:=](?!$))",
+          "name": "variable.parameter.packscript"
+        },
+        {
+          "match": "@[pears]\\b",
+          "name": "variable.packscript"
+        },
+        {
+          "match": "(?<=^\\s*/\\$?|run )\\b(execute|function|say|tellraw|summon)\\b",
+          "name": "keyword.control.packscript"
+        },
+        {
+          "match": "\\$\\{.*?\\}",
+          "name": "string.regexp"
+        },
+        {
+          "name": "string.quoted.double.packscript",
+          "begin": "(\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.packscript",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "constant.numeric.packscript",
+          "match": "\\b(0b[01]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?)[sSbBlL]?\\b"
+        }
+      ]
+    },
+    "python": {
+      "begin": "^(?!\\s*\\/)",
+      "end": "$",
+      "patterns": [
+        {
+          "name": "keyword.control.python",
+          "match": "\\b(def|class|if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in|is|and|or|not)\\b"
+        },
+        {
+          "name": "keyword.operator.logical.python",
+          "match": "\\b(and|or|not)\\b"
+        },
+        {
+          "name": "constant.language.python",
+          "match": "\\b(True|False|None)\\b"
+        },
+        {
+          "name": "keyword.other.builtin.python",
+          "match": "\\b(print|len|range|open|type|list|dict|set|tuple|int|float|str)\\b"
+        },
+        {
+          "name": "string.quoted.double.python",
+          "begin": "(\"\"\"|'''|\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.python",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "constant.numeric.python",
+          "match": "\\b(0b[01]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?)\\b"
+        },
+        {
+          "name": "comment",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "blankLines": {
+      "match": "^\\s*$",
+      "name": "blank.line.transition"
+    }
+  },
+  "scopeName": "source.dps"
 }
