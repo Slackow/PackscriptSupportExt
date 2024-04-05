@@ -2,18 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Packscript",
   "patterns": [
-    {
-      "include": "#blankLines"
-    },
-    {
-      "include": "#packscript-special"
-    },
-    {
-      "include": "#packscript-regular"
-    },
-    {
-      "include": "#python"
-    }
+    { "include": "#blankLines" },
+    { "include": "#packscript-special" },
+    { "include": "#packscript-regular" },
+    { "include": "#python-regular" }
   ],
   "repository": {
     "packscript-special": {
@@ -25,18 +17,23 @@
           "match": "\\$\\(.*?\\)",
           "name": "constant.character"
         },
-        {
-          "include": "#packscript"
-        }
+        { "include": "#packscript" }
       ]
     },
     "packscript-regular": {
       "begin": "^(?=\\s*/.*)",
       "end": "(?<![\\\\\\n])$",
       "name": "command.line.special.regular",
+      "patterns": [{ "include": "#packscript" }]
+    },
+    "python-regular": {
+      "begin": "^(?!\\s*\\/)",
+      "end": "$",
       "patterns": [
+        { "include": "#python" },
         {
-          "include": "#packscript"
+          "match": "(?<=^\\s*)create",
+          "name": "keyword.control.packscript"
         }
       ]
     },
@@ -48,15 +45,19 @@
         },
         {
           "match": "@[pears]\\b",
-          "name": "variable.packscript"
+          "name": "entity.name.function.packscript"
         },
         {
-          "match": "(?<=^\\s*/\\$?|run )\\b(execute|function|say|tellraw|summon)\\b",
+          "match": "\\bfunction\\b",
           "name": "keyword.control.packscript"
         },
         {
-          "match": "\\$\\{.*?\\}",
-          "name": "string.regexp"
+          "match": "(?<=^\\s*/\\$?|run )\\b(advancement|attribute|ban|ban-ip|banlist|bossbar|clear|clone|damage|data|datapack|debug|defaultgamemode|deop|difficulty|effect|enchant|execute|experience|fill|fillbiome|forceload|gamemode|gamerule|give|help|item|jfr|kick|kill|list|locate|loot|me|msg|op|pardon|pardon-ip|particle|perf|place|playsound|publish|random|recipe|reload|return|ride|save-all|save-off|save-on|say|schedule|scoreboard|seed|setblock|setidletimeout|setworldspawn|spawnpoint|spectate|spreadplayers|stop|stopsound|summon|tag|team|teammsg|teleport|tellraw|tick|time|title|tm|tp|transfer|trigger|w|weather|whitelist|worldborder|xp)\\b",
+          "name": "keyword.control.packscript"
+        },
+        {
+          "match": "\\$\\{.*?\\}|\\$[a-zA-Z_]\\w*",
+          "name": "string.regexp.packscript"
         },
         {
           "name": "string.quoted.double.packscript",
@@ -76,28 +77,69 @@
       ]
     },
     "python": {
-      "begin": "^(?!\\s*\\/)",
-      "end": "$",
       "patterns": [
         {
-          "name": "keyword.control.python",
-          "match": "\\b(def|class|if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in|is|and|or|not)\\b"
+          "name": "storage.type.python",
+          "match": "\\b(if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in)\\b"
         },
         {
-          "name": "keyword.operator.logical.python",
-          "match": "\\b(and|or|not)\\b"
+          "name": "storage.type.python",
+          "match": "\\b(is|and|or|not)\\b"
         },
         {
           "name": "constant.language.python",
           "match": "\\b(True|False|None)\\b"
         },
         {
+          "name": "storage.type.python",
+          "match": "\\b(def|global|class|nonlocal)\\b"
+        },
+        {
           "name": "keyword.other.builtin.python",
           "match": "\\b(print|len|range|open|type|list|dict|set|tuple|int|float|str)\\b"
         },
         {
-          "name": "string.quoted.double.python",
-          "begin": "(\"\"\"|'''|\"|')",
+          "begin": "f(\"\"\"|'''|\"|')",
+          "end": "\\1",
+          "beginCaptures": {
+            "0": {
+              "name": "string.interpolated"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "string.interpolated"
+            }
+          },
+          "patterns": [
+            {
+              "name": "string",
+              "match": "\\\\.|\\{\\{|\\}\\}"
+            },
+            {
+              "begin": "\\{",
+              "end": "\\}",
+              "beginCaptures": {
+                "0": {
+                  "name": "constant.character.escape.python"
+                }
+              },
+              "endCaptures": {
+                "0": {
+                  "name": "constant.character.escape.python"
+                }
+              },
+              "patterns": [{ "include": "#python" }]
+            },
+            {
+              "match": "[^{]+?",
+              "name": "string.interpolated"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.other.python",
+          "begin": "[rbu]?(\"\"\"|'''|\"|')",
           "end": "\\1",
           "patterns": [
             {
