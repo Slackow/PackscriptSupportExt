@@ -104,27 +104,27 @@
     "python": {
       "patterns": [
         {
-          "name": "storage.type.python",
+          "name": "storage.type.packscript",
           "match": "\\b(if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in)\\b"
         },
         {
-          "name": "storage.type.python",
+          "name": "storage.type.packscript",
           "match": "\\b(is|and|or|not)\\b"
         },
         {
-          "name": "constant.language.python",
+          "name": "constant.language.packscript",
           "match": "\\b(True|False|None)\\b"
         },
         {
-          "name": "storage.type.python",
+          "name": "storage.type.packscript",
           "match": "\\b(def|global|class|nonlocal)\\b"
         },
         {
-          "name": "keyword.other.builtin.python",
+          "name": "keyword.other.builtin.packscript",
           "match": "\\b(print|len|range|open|type|list|dict|set|tuple|int|float|str)\\b"
         },
         {
-          "name": "entity.name.function.decorator.python",
+          "name": "entity.name.function.decorator.packscript",
           "match": "^\\s*@[\\w\\.]+"
         },
         {
@@ -150,12 +150,12 @@
               "end": "\\}",
               "beginCaptures": {
                 "0": {
-                  "name": "constant.character.escape.python"
+                  "name": "constant.character.escape.packscript"
                 }
               },
               "endCaptures": {
                 "0": {
-                  "name": "constant.character.escape.python"
+                  "name": "constant.character.escape.packscript"
                 }
               },
               "patterns": [{ "include": "#python" }]
@@ -167,18 +167,18 @@
           ]
         },
         {
-          "name": "string.quoted.other.python",
+          "name": "string.quoted.other.packscript",
           "begin": "[rbu]?(\"\"\"|'''|\"|')",
           "end": "\\1",
           "patterns": [
             {
-              "name": "constant.character.escape.python",
+              "name": "constant.character.escape.packscript",
               "match": "\\\\."
             }
           ]
         },
         {
-          "name": "constant.numeric.python",
+          "name": "constant.numeric.packscript",
           "match": "\\b(0b[01]+|0o[0-7]+|0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?)\\b"
         },
         {
