@@ -17,6 +17,25 @@
           "match": "\\$\\(.*?\\)",
           "name": "constant.character"
         },
+        {
+          "name": "string.quoted.double.packscript",
+          "begin": "(\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.packscript",
+              "match": "\\\\."
+            },
+            {
+              "match": "\\$\\{.*?\\}|\\$[a-zA-Z_]\\w*",
+              "name": "string.regexp.packscript"
+            },
+            {
+              "match": "\\$\\(.*?\\)",
+              "name": "constant.character"
+            }
+          ]
+        },
         { "include": "#packscript" }
       ]
     },
@@ -24,7 +43,24 @@
       "begin": "^(?=\\s*/.*)",
       "end": "(?<![\\\\\\n])$",
       "name": "command.line.special.regular",
-      "patterns": [{ "include": "#packscript" }]
+      "patterns": [
+        { "include": "#packscript" },
+        {
+          "name": "string.quoted.double.packscript",
+          "begin": "(\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.packscript",
+              "match": "\\\\."
+            },
+            {
+              "match": "\\$\\{.*?\\}|\\$[a-zA-Z_]\\w*",
+              "name": "string.regexp.packscript"
+            }
+          ]
+        }
+      ]
     },
     "python-regular": {
       "begin": "^(?!\\s*\\/)",
@@ -32,7 +68,7 @@
       "patterns": [
         { "include": "#python" },
         {
-          "match": "(?<=^\\s*)create",
+          "match": "(?<=^\\s*)create\\b",
           "name": "keyword.control.packscript"
         }
       ]
@@ -58,17 +94,6 @@
         {
           "match": "\\$\\{.*?\\}|\\$[a-zA-Z_]\\w*",
           "name": "string.regexp.packscript"
-        },
-        {
-          "name": "string.quoted.double.packscript",
-          "begin": "(\"|')",
-          "end": "\\1",
-          "patterns": [
-            {
-              "name": "constant.character.escape.packscript",
-              "match": "\\\\."
-            }
-          ]
         },
         {
           "name": "constant.numeric.packscript",
@@ -97,6 +122,10 @@
         {
           "name": "keyword.other.builtin.python",
           "match": "\\b(print|len|range|open|type|list|dict|set|tuple|int|float|str)\\b"
+        },
+        {
+          "name": "entity.name.function.decorator.python",
+          "match": "^\\s*@[\\w\\.]+"
         },
         {
           "begin": "f(\"\"\"|'''|\"|')",
