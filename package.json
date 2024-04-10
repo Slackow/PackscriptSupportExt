@@ -1,10 +1,16 @@
 {
   "name": "ps-support",
-  "displayName": "PackscriptSupport",
+  "displayName": "PackScript Support",
+  "publisher": "Slackow",
+  "icon": "packscript128.png",
   "description": "Adds Syntax Highlighting for Packscript, an extension to python",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.87.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Slackow/PackscriptSupportExt"
   },
   "categories": [
     "Programming Languages"
@@ -12,7 +18,7 @@
   "contributes": {
     "languages": [{
       "id": "packscript",
-      "aliases": ["Packscript", "packscript"],
+      "aliases": ["PackScript", "packscript", "Packscript"],
       "extensions": [".dps",".rps",".fps"],
       "configuration": "./language-configuration.json"
     }],
