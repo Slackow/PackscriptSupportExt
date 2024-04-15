@@ -4,7 +4,7 @@
   "publisher": "Slackow",
   "icon": "packscript128.png",
   "description": "Adds Syntax Highlighting for Packscript, an extension to python",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.87.0"
   },
@@ -16,16 +16,28 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "packscript",
-      "aliases": ["PackScript", "packscript", "Packscript"],
-      "extensions": [".dps",".rps",".fps"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "packscript",
-      "scopeName": "source.dps",
-      "path": "./syntaxes/packscript.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "packscript",
+        "aliases": [
+          "PackScript",
+          "packscript",
+          "Packscript"
+        ],
+        "extensions": [
+          ".dps",
+          ".rps",
+          ".fps"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "packscript",
+        "scopeName": "source.dps",
+        "path": "./syntaxes/packscript.tmLanguage.json"
+      }
+    ]
   }
 }
