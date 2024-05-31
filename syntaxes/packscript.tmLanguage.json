@@ -80,7 +80,7 @@
           "name": "variable.parameter.packscript"
         },
         {
-          "match": "@[pears]\\b",
+          "match": "@[parens]\\b",
           "name": "entity.name.function.packscript"
         },
         {
