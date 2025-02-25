@@ -68,7 +68,7 @@
       "patterns": [
         { "include": "#python" },
         {
-          "match": "(?<=^\\s*)create\\b",
+          "match": "(?<=^\\s*)create\\b|\\bdp\\b",
           "name": "keyword.control.packscript"
         }
       ]
@@ -88,7 +88,7 @@
           "name": "keyword.control.packscript"
         },
         {
-          "match": "(?<=^\\s*(?:/\\$?)?|run )\\b(advancement|attribute|ban|ban-ip|banlist|bossbar|clear|clone|damage|data|datapack|debug|defaultgamemode|deop|difficulty|effect|enchant|execute|experience|fill|fillbiome|forceload|gamemode|gamerule|give|help|item|jfr|kick|kill|list|locate|loot|me|msg|op|pardon|pardon-ip|particle|perf|place|playsound|publish|random|recipe|reload|return|ride|save-all|save-off|save-on|say|schedule|scoreboard|seed|setblock|setidletimeout|setworldspawn|spawnpoint|spectate|spreadplayers|stop|stopsound|summon|tag|team|teammsg|teleport|tellraw|tick|time|title|tm|tp|transfer|trigger|w|weather|whitelist|worldborder|xp)\\b",
+          "match": "(?<=^\\s*(?:/\\$?)?|run )\\b(advancement|attribute|ban|ban-ip|banlist|bossbar|clear|clone|damage|data|datapack|debug|defaultgamemode|deop|difficulty|effect|enchant|execute|experience|fill|fillbiome|forceload|gamemode|gamerule|give|help|item|jfr|kick|kill|list|locate|loot|me|msg|op|pardon|pardon-ip|particle|perf|place|playsound|publish|random|recipe|reload|return|ride|rotate|save-all|save-off|save-on|say|schedule|scoreboard|seed|setblock|setidletimeout|setworldspawn|spawnpoint|spectate|spreadplayers|stop|stopsound|summon|tag|team|teammsg|teleport|tellraw|test|tick|time|title|tm|tp|transfer|trigger|w|weather|whitelist|worldborder|xp)\\b",
           "name": "keyword.control.packscript"
         },
         {
@@ -105,11 +105,11 @@
       "patterns": [
         {
           "name": "storage.type.packscript",
-          "match": "\\b(if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in)\\b"
+          "match": "\\b(if|elif|else|try|except|finally|with|for|while|return|break|continue|import|from|as|pass|raise|in|assert|del|await|async|yield)\\b"
         },
         {
           "name": "storage.type.packscript",
-          "match": "\\b(is|and|or|not)\\b"
+          "match": "\\b(is|and|or|not|lambda|(?<!\\.)match)\\b"
         },
         {
           "name": "constant.language.packscript",
@@ -121,14 +121,14 @@
         },
         {
           "name": "keyword.other.builtin.packscript",
-          "match": "\\b(print|len|range|open|type|list|dict|set|tuple|int|float|str)\\b"
+          "match": "\\b(abs|all|any|ascii|bin|breakpoint|callable|chr|compile|delattr|dir|divmod|eval|exec|format|getattr|globals|hasattr|hash|hex|id|input|isinstance|issubclass|iter|aiter|len|locals|max|min|next|anext|oct|ord|pow|print|repr|round|setattr|sorted|sum|vars|None|Ellipsis|NotImplemented|False|True|bool|memoryview|bytearray|bytes|classmethod|complex|dict|enumerate|filter|float|frozenset|property|int|list|map|object|range|reversed|set|slice|staticmethod|str|super|tuple|type|zip|__debug__|BaseException|BaseExceptionGroup|Exception|GeneratorExit|KeyboardInterrupt|SystemExit|ArithmeticError|AssertionError|AttributeError|BufferError|EOFError|ImportError|LookupError|MemoryError|NameError|OSError|ReferenceError|RuntimeError|StopAsyncIteration|StopIteration|SyntaxError|SystemError|TypeError|ValueError|Warning|FloatingPointError|OverflowError|ZeroDivisionError|BytesWarning|DeprecationWarning|EncodingWarning|FutureWarning|ImportWarning|PendingDeprecationWarning|ResourceWarning|RuntimeWarning|SyntaxWarning|UnicodeWarning|UserWarning|BlockingIOError|ChildProcessError|ConnectionError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|IndentationError|IndexError|KeyError|ModuleNotFoundError|NotImplementedError|RecursionError|UnboundLocalError|UnicodeError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|TabError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|ExceptionGroup|EnvironmentError|IOError|open|quit|exit|copyright|credits|license|help)\\b"
         },
         {
           "name": "entity.name.function.decorator.packscript",
           "match": "^\\s*@[\\w\\.]+"
         },
         {
-          "begin": "f(\"\"\"|'''|\"|')",
+          "begin": "(?:f|rf|fr)(\"\"\"|'''|\"|')",
           "end": "\\1",
           "beginCaptures": {
             "0": {
@@ -168,7 +168,7 @@
         },
         {
           "name": "string.quoted.other.packscript",
-          "begin": "[rbu]?(\"\"\"|'''|\"|')",
+          "begin": "(?:[rbu]|br|rb)?(\"\"\"|'''|\"|')",
           "end": "\\1",
           "patterns": [
             {
