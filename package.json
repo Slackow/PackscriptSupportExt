@@ -4,7 +4,9 @@
   "publisher": "Slackow",
   "icon": "packscript128.png",
   "description": "Adds Syntax Highlighting for Packscript, an extension to python",
-  "version": "0.0.7",
+  "version": "0.1.0",
+  "main": "./extension.js",
+  "activationEvents": ["workspaceContains:.packscript-ext.json"],
   "engines": {
     "vscode": "^1.87.0"
   },
