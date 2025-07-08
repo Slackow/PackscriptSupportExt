@@ -9,7 +9,7 @@
   ],
   "repository": {
     "packscript-special": {
-      "begin": "^\\s*/\\$",
+      "begin": "^\\s*/\\$(?!\\{)",
       "end": "(?<![\\\\\\n])$",
       "name": "command.line.special.packscript",
       "patterns": [
